@@ -12,15 +12,14 @@ export class HomePage extends React.Component {
   props: Props;
 
   componentDidMount() {
-    this.props.weatherActions.getWeatherFor('london');
+    // this.props.weatherActions.getWeatherFor('london');
   }
 
   render() {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      const {actions} = this.props;
-      console.log(this.props)
+      const {cityActions} = this.props;
 
       cityActions.addCity(this.refs._cityName.value);
     }
@@ -35,14 +34,18 @@ export class HomePage extends React.Component {
 
     return (
       <div>
-        <h2 className={styles.example}>Weather App</h2>
+        <div>
+          <form onSubmit={handleSubmit} className="row">
+            <div className="column column-80">
+              <input type="text"  name="cityName" ref="_cityName"></input>
+            </div>
+            <input className="column column-20" type="submit"></input>
+          </form>
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="cityName" ref="_cityName"></input>
-          <input type="submit"/>
-        </form>
-
-        <button onClick={deleteCity}> Delete </button>
+        <div className="row">
+          <button className="column-50" onClick={deleteCity}> Delete </button>
+        </div>
       </div>
     )
   }

@@ -3,6 +3,9 @@ import './styles/core.scss'
 
 export const CoreLayout = ({ children }) => (
   <div className='container text-center'>
+    <div className="row">
+      <h2>Weather App</h2>
+    </div>
     {children}
   </div>
 )
