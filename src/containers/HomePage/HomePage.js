@@ -24,6 +24,14 @@ export class HomePage extends React.Component {
       actions.addCity(this.refs._cityName.value);
     }
 
+    const deleteCity = () => {
+      const {actions} = this.props;
+
+      actions.removeCity(this.refs._cityName.value);
+    }
+
+
+
     return (
       <div>
         <h2 className={styles.example}>Weather App</h2>
@@ -33,6 +41,7 @@ export class HomePage extends React.Component {
           <input type="submit"/>
         </form>
 
+        <button onClick={deleteCity}> Delete </button>
       </div>
     )
   }
