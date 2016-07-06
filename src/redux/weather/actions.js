@@ -31,12 +31,10 @@ export function getWeatherFor(cityName) {
     weatherAxios.get('',{ params: {q: cityName}})
       .then((response) => {
         console.info(response.data)
-        if (response.data.cod === 200) {
+        if (response.data.cod === "200") {
           dispatch(updateCity(cityName, response.data));
         }
       })
-
-    // Make your weather call here
 
   }
 }
