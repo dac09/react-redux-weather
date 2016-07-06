@@ -1,8 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
 import * as cityActions from '../../redux/cities/actions';
 import * as weatherActions from '../../redux/weather/actions';
+
+import CitySearch from '../../components/CitySearch/';
+
 import styles from './homepage.scss';
 
 type Props = {
@@ -16,35 +20,22 @@ export class HomePage extends React.Component {
   }
 
   render() {
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      const {cityActions} = this.props;
-
-      cityActions.addCity(this.refs._cityName.value);
-    }
-
     const deleteCity = () => {
       const {cityActions} = this.props;
 
       cityActions.removeCity(this.refs._cityName.value);
     }
 
-
+    const {cityActions} = this.props;
 
     return (
       <div>
         <div>
-          <form onSubmit={handleSubmit} className="row">
-            <div className="column column-80">
-              <input type="text"  name="cityName" ref="_cityName"></input>
-            </div>
-            <input className="column column-20" type="submit"></input>
-          </form>
+          <CitySearch save={cityActions.addCity}/>
         </div>
 
         <div className="row">
-          <button className="column-50" onClick={deleteCity}> Delete </button>
+          <button className="column column-50" onClick={deleteCity}> Delete </button>
         </div>
       </div>
     )
