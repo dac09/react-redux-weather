@@ -1,6 +1,6 @@
-import reducer, { initialState } from 'redux/modules/Boom'
+import reducer, { initialState } from 'redux/modules/cities'
 
-describe('(Redux) Boom', () => {
+describe('(Redux) Cities', () => {
   describe('(Reducer)', () => {
     it('sets up initial state', () => {
       expect(reducer(undefined, {})).to.eql(initialState)

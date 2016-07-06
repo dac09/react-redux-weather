@@ -1,6 +1,6 @@
-import reducer, { initialState } from 'redux/modules/Jobs'
+import reducer, { initialState } from 'redux/modules/Weather'
 
-describe('(Redux) Jobs', () => {
+describe('(Redux) Weather', () => {
   describe('(Reducer)', () => {
     it('sets up initial state', () => {
       expect(reducer(undefined, {})).to.eql(initialState)

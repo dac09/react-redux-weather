@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as cityActions from '../../redux/cities/actions';
+import * as weatherActions from '../../redux/weather/actions';
 import styles from './homepage.scss';
 
 type Props = {
@@ -11,7 +12,7 @@ export class HomePage extends React.Component {
   props: Props;
 
   componentDidMount() {
-    console.log(this.refs)
+    this.props.weatherActions.getWeatherFor('london');
   }
 
   render() {
@@ -21,13 +22,13 @@ export class HomePage extends React.Component {
       const {actions} = this.props;
       console.log(this.props)
 
-      actions.addCity(this.refs._cityName.value);
+      cityActions.addCity(this.refs._cityName.value);
     }
 
     const deleteCity = () => {
-      const {actions} = this.props;
+      const {cityActions} = this.props;
 
-      actions.removeCity(this.refs._cityName.value);
+      cityActions.removeCity(this.refs._cityName.value);
     }
 
 
@@ -54,7 +55,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(cityActions, dispatch)
+    cityActions: bindActionCreators(cityActions, dispatch),
+    weatherActions: bindActionCreators(weatherActions, dispatch)
   }
 }
 

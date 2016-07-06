@@ -30,12 +30,3 @@ export function updateCity(city, data) {
 
 // Thunk Actions
 // -------------
-
-export function getWeatherFor(cityName) {
-  return dispatch => {
-
-    // Make your weather call here
-
-    dispatch(updateCity(cityName, data));
-  }
-}
