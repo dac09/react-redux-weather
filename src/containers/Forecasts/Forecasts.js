@@ -7,6 +7,8 @@ import * as weatherActions from '../../redux/weather/actions';
 
 import styles from './forecastList.scss';
 
+import Forecast from '../../components/Forecast';
+
 
 type Props = {
 
@@ -42,17 +44,17 @@ export class Forecasts extends React.Component {
     const renderForecastTracks = () => {
       const cityList = Object.keys(this.props.cities);
 
-      return cityList.map((city) => {
+      return cityList.map((city, index) => {
+        const {weather} = this.props;
+
         return (
-          <div>
+          <div key={index} className="animated slideInDown">
             <div className="row">
               <h3 className="column column-90">{city}</h3>
               <button className="column column-10 button-clear" onClick={() => deleteCity(city)}>× Remove</button>
             </div>
             <div className={`${styles.track} row`}>
-              <div className="forecast-card">
-                {/*<Forecast forecast={weather[city]}>*/}
-              </div>
+                {weather && <Forecast weatherList={weather[city].list}/>}
             </div>
         </div>)
       })
