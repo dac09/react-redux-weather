@@ -1,8 +1,8 @@
-.track {
-  min-height: 300px;
-  background-color: #efefef;
-  margin-bottom: 40px;
-  border-radius: 5px;
-  width: 100%;
-  overflow: auto;
+.trackWrap {
+
+    width: 100%;
+    height: 200px;
+    float: left;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }

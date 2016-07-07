@@ -24,10 +24,8 @@ export class Forecast extends React.Component {
               // Was trying to use a card component
               // but CSS issues!
               <div className={styles.cardContainer}>
-                  <div>
                     <h4>{forecast.weather[0].main}</h4>
                     {index <= 5 ? <FormattedRelative value={date}/> : <FormattedDate value={date} weekday="long" hour="2-digit"/>  }
-                  </div>
               </div>
             )
           }
@@ -38,7 +36,7 @@ export class Forecast extends React.Component {
 
     console.info(this.props.weatherList)
     return (
-      <div>
+      <div className={styles.track}>
         {this.props.weatherList && renderCards()}
       </div>
     )

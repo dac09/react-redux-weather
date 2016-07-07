@@ -1,6 +1,10 @@
 .cardContainer {
   width: 150px;
-  float: left;
+  display:inline-block;
   height: 200px;
-  display: block;
+}
+.track {
+  height: 200px;
+  background-color: #efefef;
+  display:inline-flex;
 }

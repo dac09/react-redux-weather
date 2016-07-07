@@ -53,8 +53,8 @@ export class Forecasts extends React.Component {
               <h3 className="column column-90">{city}</h3>
               <button className="column column-10 button-clear" onClick={() => deleteCity(city)}>× Remove</button>
             </div>
-            <div className={`${styles.track} row`}>
-                {weather && <Forecast weatherList={weather[city].list}/>}
+            <div className={`${styles.trackWrap} row`}>
+                {weather && weather[city] && <Forecast weatherList={weather[city].list}/>}
             </div>
         </div>)
       })
