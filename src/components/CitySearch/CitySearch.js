@@ -1,7 +1,7 @@
 import React from 'react'
 
 type Props = {
-
+  save: React.PropTypes.func;
 };
 export class CitySearch extends React.Component {
   props: Props;

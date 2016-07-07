@@ -13,8 +13,10 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {[action.city]: action.data})
 
     case cityActions.REMOVE_CITY:
-    // Use reflect so that no try catch block
-      return Object.assign({}, Reflect.deleteProperty(state, action.city))
+      const newState = Object.assign({}, state);
+      // Use reflect so that no try catch block
+      Reflect.deleteProperty(newState, action.city);
+      return newState;
 
     default:
       return state;

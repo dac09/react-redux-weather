@@ -5,7 +5,9 @@ import { bindActionCreators } from 'redux'
 import * as cityActions from '../../redux/cities/actions';
 import * as weatherActions from '../../redux/weather/actions';
 
-import CitySearch from '../../components/CitySearch/';
+import Forecasts from '../../containers/Forecasts';
+
+import CitySearch from '../../components/CitySearch';
 
 import styles from './homepage.scss';
 
@@ -34,8 +36,9 @@ export class HomePage extends React.Component {
           <CitySearch save={cityActions.addCity}/>
         </div>
 
-        <div className="row">
-          <button className="column column-50" onClick={deleteCity}> Delete </button>
+
+        <div>
+          <Forecasts/>
         </div>
       </div>
     )
