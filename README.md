@@ -1,34 +1,9 @@
-React Redux Starter Kit
+Weather app
 =======================
+Extremely simple, *incomplete* app for fetching weather information based on city.
 
-[![Join the chat at https://gitter.im/davezuko/react-redux-starter-kit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/davezuko/react-redux-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
-[![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
-[![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+Uses a modified version of react-redux-starter-kit, with blueprints/structure that I find more comfortable to use.
 
-This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
-
-The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
-
-Finally, This project wouldn't be possible without the help of our many contributors, so [thank you](#thank-you) for all of your help.
-
-
-Table of Contents
------------------
-1. [Requirements](#requirements)
-1. [Features](#features)
-1. [Getting Started](#getting-started)
-1. [Usage](#usage)
-1. [CLI Generators](#cli-generators)
-1. [Structure](#structure)
-1. [Webpack](#webpack)
-1. [Server](#server)
-1. [Styles](#styles)
-1. [Testing](#testing)
-1. [Deployment](#deployment)
-1. [Troubleshooting](#troubleshooting)
-1. [Thank You](#thank-you)
 
 Requirements
 ------------
@@ -70,8 +45,8 @@ Getting Started
 Just clone the repo and install the necessary node modules:
 
 ```shell
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git
-$ cd react-redux-starter-kit
+$ git clone git@github.com:dac09/react-redux-weather.git
+$ cd react-redux-weather
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
 $ npm start                     # Compile and launch
 ```
@@ -90,22 +65,6 @@ npm i --D redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
 
 Then follow the [manual integration walkthrough](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md).
 
-### Starting a New Project
-
-First, I highly suggest checking out a new project by [SpencerCDixon](https://github.com/SpencerCDixon): [redux-cli](https://github.com/SpencerCDixon/redux-cli). This tool integrates extremely well with this project and offers added benefits such as generators (components, redux modules, etc.) and config/template management. It's still a work in progress, but give it a shot and file bugs to help make the project more robust.
-
-Alternatively, if you just want to stick with this project and want to start a fresh project without having to clean up the example code in `master`, you can do the following after cloning the repo:
-
-```shell
-git fetch origin new-project-v3                   # Make sure you've fetched the latest copy of this branch from remote
-git checkout new-project-v3                       # Checkout the new-project branch
-$ rm -rf .git && git init                         # Start a new git repository
-```
-
-Great, you now have a fresh project! There are a few titles you'll probably want to update, and then you're good to go:
-
-* `~/package.json` - package name
-* `~/src/index.html` - template title tag
 
 Usage
 -----
@@ -176,112 +135,6 @@ All of these blueprints are available (and can be overriden) in the `~/blueprint
 
 [See the Redux CLI github repo](https://github.com/SpencerCDixon/redux-cli#creating-blueprints) for more information on how to create and use blueprints.
 
-Structure
----------
-
-The folder structure provided is only meant to serve as a guide, it is by no means prescriptive.
-
-```
-.
-├── bin                      # Build/Start scripts
-├── blueprints               # Blueprint files for redux-cli
-├── build                    # All build-related configuration
-│   └── webpack              # Environment-specific configuration files for webpack
-├── config                   # Project configuration settings
-├── interfaces               # Type declarations for Flow
-├── server                   # Koa application (uses webpack middleware)
-│   └── main.js              # Server application entry point
-├── src                      # Application source code
-│   ├── main.js              # Application bootstrap and rendering
-│   ├── components           # Reusable Presentational Components
-│   ├── containers           # Reusable Container Components
-│   ├── layouts              # Components that dictate major page structure
-│   ├── static               # Static assets (not imported anywhere in source code)
-│   ├── styles               # Application-wide styles (generally settings)
-│   ├── store                # Redux-specific pieces
-│   │   ├── createStore.js   # Create and instrument redux store
-│   │   └── reducers.js      # Reducer registry and injection
-│   └── routes               # Main route definitions and async split points
-│       ├── index.js         # Bootstrap main application routes with store
-│       ├── Root.js          # Wrapper component for context-aware providers
-│       ├── Home             # Fractal route
-│       │   ├── index.js     # Route definitions and async split points
-│       │   ├── assets       # Assets required to render components
-│       │   ├── components   # Presentational React Components
-│       │   ├── container    # Connect components to actions and store
-│       │   ├── modules      # Collections of reducers/constants/actions
-│       │   └── routes **    # Fractal sub-routes (** optional)
-│       └── NotFound         # Capture unknown routes in component
-└── tests                    # Unit tests
-```
-
-#### Fractal App Structure
-
-_Also known as: Self-Contained Apps, Recursive Route Hierarchy, Providers, etc_
-
-Small applications can be built using a flat directory structure, with folders for `components`, `containers`, etc. However, this structure does not scale and can seriously affect development velocity as your project grows. Starting with a fractal structure allows your application to organically drive its own architecture from day one.
-
-We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. *Additional child routes can be nested in a fractal hierarchy.*
-
-This provides many benefits that may not be immediately obvious:
-* Routes can be be bundled into "chunks" using webpack's [code splitting](https://webpack.github.io/docs/code-splitting.html) and merging algorithm. This means that the entire dependency tree for each route can be omitted from the initial bundle and then loaded *on demand*.
-* Since logic is self-contained, routes can easily be broken into separate repositories and referenced with webpack's [DLL plugin](https://github.com/webpack/docs/wiki/list-of-plugins#dllplugin) for flexible, high-performance development and scalability.
-
-Large, mature apps tend to naturally organize themselves in this way—analogous to large, mature trees (as in actual trees :evergreen_tree:). The trunk is the router, branches are route bundles, and leaves are views composed of common/shared components/containers. Global application and UI state should be placed on or close to the trunk (or perhaps at the base of a huge branch, eg. `/app` route).
-
-##### Layouts
-* Stateless components that dictate major page structure
-* Useful for composing `react-router` [named components](https://github.com/reactjs/react-router/blob/master/docs/API.md#components-1) into views
-
-##### Components
-* Prefer [stateless function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
-  - eg: `const HelloMessage = ({ name }) => <div>Hello {name}</div>`
-* Top-level `components` and `containers` directories contain reusable components
-
-##### Containers
-* Containers **only** `connect` presentational components to actions/state
-  - Rule of thumb: **no JSX in containers**!
-* One or many container components can be composed in a stateless function component
-* Tip: props injected by `react-router` can be accessed using `connect`:
-  ```js
-    // CounterWithMusicContainer.js
-    import { connect } from 'react-redux'
-    import Counter from 'components/Counter'
-    export const mapStateToProps = (state, ownProps) => ({
-      counter: state.counter,
-      music: ownProps.location.query.music // why not
-    })
-    export default connect(mapStateToProps)(Counter)
-
-    // Location -> 'localhost:3000/counter?music=reggae'
-    // Counter.props = { counter: 0, music: 'reggae' }
-  ```
-
-##### Routes
-* A route directory...
-  - *Must* contain an `index.js` that returns route definition
-  - **Optional:** assets, components, containers, redux modules, nested child routes
-  - Additional child routes can be nested within `routes` directory in a fractal hierarchy
-
-**Note:** This structure is designed to provide a flexible foundation for module bundling and dynamic loading. **Using a fractal structure is optional, smaller apps might benefit from a flat routes directory**, which is totally cool! Webpack creates split points based on static analysis of `require` during compilation; the recursive hierarchy folder structure is simply for organizational purposes.
-
-Webpack
--------
-
-### Vendor Bundle
-You can redefine which packages to bundle separately by modifying `compiler_vendor` in `~/config/_base.js`. These default to:
-
-```js
-[
-  'history',
-  'react',
-  'react-redux',
-  'react-router',
-  'react-router-redux',
-  'redux'
-]
-```
-
 ### Webpack Root Resolve
 Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
 
@@ -345,60 +198,6 @@ To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma
 
 Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
 
-Deployment
-----------
-
-Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run compile` (make sure to specify your target `NODE_ENV` as well). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit. However, if you do need help with more advanced deployment strategies, here are a few tips:
-
-If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The Koa server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
-
-Have more questions? Feel free to submit an issue or join the Gitter chat!
-
-Troubleshooting
----------------
-
-### Want Semicolons?
-
-After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
-
-### `npm run dev:nw` produces `cannot read location of undefined.`
-
-This is most likely because the new window has been blocked by your popup blocker, so make sure it's disabled before trying again.
-
-Reference: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
-
-### Babel Issues
-
-Running into issues with Babel? Babel 6 can be tricky, please either report an issue or try out the [stable v0.18.1 release](https://github.com/davezuko/react-redux-starter-kit/tree/v0.18.1) with Babel 5. If you do report an issue, please try to include relevant debugging information such as your node, npm, and babel versions.
-
-### Babel Polyfill
-
-By default this repo does not bundle the babel polyfill in order to reduce bundle size. If you want to include it, you can use [this commit](https://github.com/jokeyrhyme/react-redux-starter-kit/commit/f3f095b547ee63474b9361128bb95d370da04b35) from [jokeyrhyme](https://github.com/jokeyrhyme) as a reference.
-
-### Internationalization Support
-
-In keeping with the goals of this project, no internationalization support is provided out of the box. However, [juanda99](https://github.com/juanda99) has been kind enough to maintain a fork of this repo with internationalization support, [check it out!](https://github.com/juanda99/react-redux-starter-kit)
-
-### Deployment Issues (Generally Heroku)
-
-Make sure that your environment is installing both dependencies _and_ devDependencies, since the latter are required to build the application. You can also reference [this issue](https://github.com/davezuko/react-redux-starter-kit/issues/571) for more details.
-
-### High editor CPU usage after compilation
-
-While this is common to any sizable application, it's worth noting for those who may not know: if you happen to notice higher CPU usage in your editor after compiling the application, you may need to tell your editor not to process the dist folder. For example, in Sublime you can add:
-
-```
-	"folder_exclude_patterns": [".svn",	".git",	".hg", "CVS",	"node_modules",	"dist"]
-```
-
-Thank You
----------
-
-This project wouldn't be possible without help from the community, so I'd like to highlight some of its biggest contributors. Thank you all for your hard work, you've made my life a lot easier and taught me a lot in the process.
-
-* [Justin Greenberg](https://github.com/justingreenberg) - For all of your PR's, getting us to Babel 6, and constant work improving our patterns.
-* [Roman Pearah](https://github.com/neverfox) - For your bug reports, help in triaging issues, and PR contributions.
-* [Spencer Dixin](https://github.com/SpencerCDixon) - For your creation of [redux-cli](https://github.com/SpencerCDixon/redux-cli).
-* [Jonas Matser](https://github.com/mtsr) - For your help in triaging issues and unending support in our Gitter channel.
-
-And to everyone else who has contributed, even if you are not listed here your work is appreciated.
+Special thanks
+-------
+Special thanks to the authors of react-redux-starter-kit as it saved me hours getting started.
