@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux'
 import * as cityActions from '../../redux/cities/actions';
 import * as weatherActions from '../../redux/weather/actions';
 
+import styles from './forecastList.scss';
+
+
 type Props = {
 
 }
@@ -41,10 +44,12 @@ export class Forecasts extends React.Component {
 
       return cityList.map((city) => {
         return (
-          <div className="row">
-            <h3 className="column column-80">{city}</h3>
-            <button className="column column-10" onClick={() => deleteCity(city)}> Delete </button>
-            <div className="forecast-track">
+          <div>
+            <div className="row">
+              <h3 className="column column-90">{city}</h3>
+              <button className="column column-10 button-clear" onClick={() => deleteCity(city)}>× Remove</button>
+            </div>
+            <div className={`${styles.track} row`}>
               <div className="forecast-card">
                 {/*<Forecast forecast={weather[city]}>*/}
               </div>

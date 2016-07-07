@@ -21,7 +21,7 @@ export class CitySearch extends React.Component {
         <div className="column column-80">
           <input type="text"  name="cityName" ref="_cityName"></input>
         </div>
-        <input className="column column-20" type="submit"></input>
+        <button className="column column-20" type="submit">Search</button>
       </form>
     )
   }
